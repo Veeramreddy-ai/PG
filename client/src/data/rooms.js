@@ -1,0 +1,85 @@
+const rooms = [
+  {
+    id: 1,
+    title: "1 Bed AC Room",
+    type: "AC",
+    occupancy: "Single Bed",
+    image: "/images/rooms/1-bed-ac-room-tv-opposite.png",
+    amenities: [
+      "AC",
+      "TV",
+      "Bed",
+      "Fan",
+      "Hot Water",
+    ],
+  },
+  {
+    id: 2,
+    title: "2 Bed AC Room",
+    type: "AC",
+    occupancy: "2 Sharing",
+    image: "/images/rooms/2-bed-ac-room-tv-opposite.png",
+    amenities: [
+      "AC",
+      "TV",
+      "2 Beds",
+      "Fan",
+      "Hot Water",
+    ],
+  },
+  {
+    id: 3,
+    title: "3 Bed AC Room",
+    type: "AC",
+    occupancy: "3 Sharing",
+    image: "/images/rooms/3-bed-ac-room-tv-opposite.png",
+    amenities: [
+      "AC",
+      "TV",
+      "3 Beds",
+      "Fan",
+      "Hot Water",
+    ],
+  },
+  {
+    id: 4,
+    title: "1 Bed Non-AC Room",
+    type: "Non-AC",
+    occupancy: "Single Bed",
+    image: "/images/rooms/1-bed-non-ac-room-tv-opposite.png",
+    amenities: [
+      "TV",
+      "Bed",
+      "Fan",
+      "Hot Water",
+    ],
+  },
+  {
+    id: 5,
+    title: "2 Bed Non-AC Room",
+    type: "Non-AC",
+    occupancy: "2 Sharing",
+    image: "/images/rooms/2-bed-non-ac-room-tv-opposite.png",
+    amenities: [
+      "TV",
+      "2 Beds",
+      "Fan",
+      "Hot Water",
+    ],
+  },
+  {
+    id: 6,
+    title: "3 Bed Non-AC Room",
+    type: "Non-AC",
+    occupancy: "3 Sharing",
+    image: "/images/rooms/3-bed-non-ac-room-tv-opposite.png",
+    amenities: [
+      "TV",
+      "3 Beds",
+      "Fan",
+      "Hot Water",
+    ],
+  },
+];
+
+export default rooms;
