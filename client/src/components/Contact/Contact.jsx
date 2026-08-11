@@ -19,9 +19,13 @@ const Contact = () => {
   const latitude = 17.234889;
   const longitude = 78.568667;
 
-  const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+  const mapQuery = encodeURIComponent(
+  "Skyline Luxury Men's PG, TCS Adibatla, Plot No. 101, Hyderabad, Bongloor, Telangana 501510"
+);
 
-  const mapEmbedUrl = `https://www.google.com/maps?q=${latitude},${longitude}&output=embed`;
+const mapUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
+
+const mapEmbedUrl = `https://www.google.com/maps?q=${mapQuery}&output=embed`;
 
   const whatsappNumber = "917095769276";
 
@@ -62,8 +66,9 @@ Please get back to me regarding my enquiry.
       id="contact"
       component="section"
       sx={{
-        background: "#f8fafc",
         py: { xs: 8, md: 12 },
+        background:
+          "linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)",
       }}
     >
       <Container maxWidth="lg">
@@ -73,7 +78,7 @@ Please get back to me regarding my enquiry.
         <Box
           sx={{
             textAlign: "center",
-            maxWidth: 720,
+            maxWidth: 760,
             mx: "auto",
             mb: { xs: 5, md: 7 },
           }}
@@ -103,7 +108,13 @@ Please get back to me regarding my enquiry.
               color: "#0f172a",
             }}
           >
-            Let&apos;s Talk About Your Stay
+            Let's Talk About Your{" "}
+            <Box
+              component="span"
+              sx={{ color: "#1565C0" }}
+            >
+              Stay
+            </Box>
           </Typography>
 
           <Typography
@@ -128,7 +139,7 @@ Please get back to me regarding my enquiry.
           alignItems="stretch"
         >
 
-          {/* ================= LEFT ================= */}
+          {/* ================= LEFT CONTACT INFO ================= */}
 
           <Grid size={{ xs: 12, md: 5 }}>
             <Paper
@@ -143,6 +154,8 @@ Please get back to me regarding my enquiry.
                 borderRadius: 4,
                 background: "#ffffff",
                 border: "1px solid #e2e8f0",
+                boxShadow:
+                  "0 15px 40px rgba(15,23,42,0.06)",
               }}
             >
               <Typography
@@ -168,14 +181,15 @@ Please get back to me regarding my enquiry.
               >
                 <Box
                   sx={{
-                    width: 48,
-                    height: 48,
-                    minWidth: 48,
+                    width: 50,
+                    height: 50,
+                    minWidth: 50,
                     borderRadius: 2.5,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: "#eff6ff",
+                    background:
+                      "linear-gradient(135deg, #eff6ff, #dbeafe)",
                     color: "#1565C0",
                   }}
                 >
@@ -185,7 +199,10 @@ Please get back to me regarding my enquiry.
                 <Box>
                   <Typography
                     fontWeight={800}
-                    sx={{ mb: 0.5 }}
+                    sx={{
+                      mb: 0.5,
+                      color: "#0f172a",
+                    }}
                   >
                     Phone
                   </Typography>
@@ -196,6 +213,8 @@ Please get back to me regarding my enquiry.
                     sx={{
                       color: "#64748b",
                       textDecoration: "none",
+                      transition: "0.2s",
+
                       "&:hover": {
                         color: "#1565C0",
                       },
@@ -220,14 +239,15 @@ Please get back to me regarding my enquiry.
               >
                 <Box
                   sx={{
-                    width: 48,
-                    height: 48,
-                    minWidth: 48,
+                    width: 50,
+                    height: 50,
+                    minWidth: 50,
                     borderRadius: 2.5,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: "#eff6ff",
+                    background:
+                      "linear-gradient(135deg, #eff6ff, #dbeafe)",
                     color: "#1565C0",
                   }}
                 >
@@ -237,7 +257,10 @@ Please get back to me regarding my enquiry.
                 <Box sx={{ minWidth: 0 }}>
                   <Typography
                     fontWeight={800}
-                    sx={{ mb: 0.5 }}
+                    sx={{
+                      mb: 0.5,
+                      color: "#0f172a",
+                    }}
                   >
                     Email
                   </Typography>
@@ -249,6 +272,7 @@ Please get back to me regarding my enquiry.
                       color: "#64748b",
                       textDecoration: "none",
                       wordBreak: "break-word",
+
                       "&:hover": {
                         color: "#1565C0",
                       },
@@ -273,14 +297,15 @@ Please get back to me regarding my enquiry.
               >
                 <Box
                   sx={{
-                    width: 48,
-                    height: 48,
-                    minWidth: 48,
+                    width: 50,
+                    height: 50,
+                    minWidth: 50,
                     borderRadius: 2.5,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: "#ecfdf5",
+                    background:
+                      "linear-gradient(135deg, #ecfdf5, #dcfce7)",
                     color: "#16a34a",
                   }}
                 >
@@ -290,7 +315,10 @@ Please get back to me regarding my enquiry.
                 <Box>
                   <Typography
                     fontWeight={800}
-                    sx={{ mb: 0.5 }}
+                    sx={{
+                      mb: 0.5,
+                      color: "#0f172a",
+                    }}
                   >
                     WhatsApp
                   </Typography>
@@ -317,6 +345,8 @@ Please get back to me regarding my enquiry.
                       borderColor: "#16a34a",
                       fontWeight: 800,
                       textTransform: "none",
+                      borderRadius: 2,
+
                       "&:hover": {
                         borderColor: "#15803d",
                         background: "#f0fdf4",
@@ -341,14 +371,15 @@ Please get back to me regarding my enquiry.
               >
                 <Box
                   sx={{
-                    width: 48,
-                    height: 48,
-                    minWidth: 48,
+                    width: 50,
+                    height: 50,
+                    minWidth: 50,
                     borderRadius: 2.5,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    background: "#eff6ff",
+                    background:
+                      "linear-gradient(135deg, #eff6ff, #dbeafe)",
                     color: "#1565C0",
                   }}
                 >
@@ -358,7 +389,10 @@ Please get back to me regarding my enquiry.
                 <Box>
                   <Typography
                     fontWeight={800}
-                    sx={{ mb: 0.5 }}
+                    sx={{
+                      mb: 0.5,
+                      color: "#0f172a",
+                    }}
                   >
                     Skyline PG
                   </Typography>
@@ -372,7 +406,7 @@ Please get back to me regarding my enquiry.
                     TCS Adibatla, Plot No. 101,
                     <br />
                     Hyderabad, Bongloor,
-                    
+                    <br />
                     Telangana 501510
                   </Typography>
 
@@ -413,6 +447,8 @@ Please get back to me regarding my enquiry.
                 borderRadius: 4,
                 background: "#ffffff",
                 border: "1px solid #e2e8f0",
+                boxShadow:
+                  "0 15px 40px rgba(15,23,42,0.06)",
               }}
             >
               <Typography
@@ -433,7 +469,7 @@ Please get back to me regarding my enquiry.
                   lineHeight: 1.7,
                 }}
               >
-                Fill in your details and we&apos;ll get back to
+                Fill in your details and we'll get back to
                 you through WhatsApp.
               </Typography>
 
@@ -453,6 +489,11 @@ Please get back to me regarding my enquiry.
                       name="name"
                       fullWidth
                       required
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 2.5,
+                        },
+                      }}
                     />
                   </Grid>
 
@@ -463,6 +504,11 @@ Please get back to me regarding my enquiry.
                       type="tel"
                       fullWidth
                       required
+                      sx={{
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: 2.5,
+                        },
+                      }}
                     />
                   </Grid>
                 </Grid>
@@ -472,6 +518,11 @@ Please get back to me regarding my enquiry.
                   name="email"
                   type="email"
                   fullWidth
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2.5,
+                    },
+                  }}
                 />
 
                 <TextField
@@ -481,6 +532,11 @@ Please get back to me regarding my enquiry.
                   rows={5}
                   fullWidth
                   required
+                  sx={{
+                    "& .MuiOutlinedInput-root": {
+                      borderRadius: 2.5,
+                    },
+                  }}
                 />
 
                 <Button
@@ -493,12 +549,17 @@ Please get back to me regarding my enquiry.
                     mt: 1,
                     fontWeight: 800,
                     borderRadius: 2.5,
-                    background: "#16a34a",
+                    background:
+                      "linear-gradient(135deg, #16a34a, #15803d)",
                     textTransform: "none",
-                    boxShadow: "none",
+                    boxShadow:
+                      "0 8px 20px rgba(22,163,74,0.18)",
+
                     "&:hover": {
-                      background: "#15803d",
-                      boxShadow: "none",
+                      background:
+                        "linear-gradient(135deg, #15803d, #166534)",
+                      boxShadow:
+                        "0 10px 24px rgba(22,163,74,0.25)",
                     },
                   }}
                 >
@@ -519,31 +580,60 @@ Please get back to me regarding my enquiry.
               borderRadius: 4,
               background: "#ffffff",
               border: "1px solid #e2e8f0",
+              boxShadow:
+                "0 15px 40px rgba(15,23,42,0.06)",
             }}
           >
+            {/* MAP HEADER */}
+
             <Box
               sx={{
                 px: { xs: 3, md: 4 },
                 py: { xs: 2.5, md: 3 },
+                display: "flex",
+                alignItems: "center",
+                gap: 2,
               }}
             >
-              <Typography
-                variant="h5"
-                fontWeight={900}
-                color="#0f172a"
-              >
-                Find Skyline PG
-              </Typography>
-
-              <Typography
+              <Box
                 sx={{
-                  color: "#64748b",
-                  mt: 0.5,
+                  width: 48,
+                  height: 48,
+                  minWidth: 48,
+                  borderRadius: 2.5,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background:
+                    "linear-gradient(135deg, #eff6ff, #dbeafe)",
+                  color: "#1565C0",
                 }}
               >
-                View our location directly on Google Maps.
-              </Typography>
+                <LocationOnIcon />
+              </Box>
+
+              <Box>
+                <Typography
+                  variant="h5"
+                  fontWeight={900}
+                  color="#0f172a"
+                >
+                  Find Skyline PG
+                </Typography>
+
+                <Typography
+                  sx={{
+                    color: "#64748b",
+                    mt: 0.5,
+                    fontSize: "0.92rem",
+                  }}
+                >
+                  View our location directly on Google Maps.
+                </Typography>
+              </Box>
             </Box>
+
+            {/* MAP */}
 
             <Box
               sx={{

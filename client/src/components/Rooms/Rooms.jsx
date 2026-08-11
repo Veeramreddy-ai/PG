@@ -40,8 +40,7 @@ const Rooms = () => {
     setSelectedRoom(null);
 
     setTimeout(() => {
-      const bookingSection =
-        document.getElementById("booking");
+      const bookingSection = document.getElementById("booking");
 
       if (bookingSection) {
         bookingSection.scrollIntoView({
@@ -77,9 +76,7 @@ const Rooms = () => {
       return <WaterDropIcon fontSize="small" />;
     }
 
-    if (
-      value.includes("bed")
-    ) {
+    if (value.includes("bed")) {
       return <BedIcon fontSize="small" />;
     }
 
@@ -135,6 +132,7 @@ const Rooms = () => {
             }}
           >
             Comfortable Rooms
+
             <Box
               component="span"
               sx={{
@@ -182,25 +180,22 @@ const Rooms = () => {
                   overflow: "hidden",
                   borderRadius: 4,
                   background: "#ffffff",
-                  border:
-                    "1px solid #e2e8f0",
+                  border: "1px solid #e2e8f0",
                   cursor: "pointer",
 
                   transition:
                     "transform .3s ease, box-shadow .3s ease, border-color .3s ease",
 
                   "&:hover": {
-                    transform:
-                      "translateY(-7px)",
-                    borderColor:
-                      "#bfdbfe",
+                    transform: "translateY(-7px)",
+                    borderColor: "#bfdbfe",
                     boxShadow:
                       "0 20px 45px rgba(15,23,42,.12)",
                   },
                 }}
               >
 
-                {/* IMAGE */}
+                {/* ================= IMAGE ================= */}
 
                 <Box
                   sx={{
@@ -221,13 +216,7 @@ const Rooms = () => {
                       },
                       objectFit: "cover",
                       display: "block",
-                      transition:
-                        "transform .5s ease",
-
-                      ".MuiCard-root:hover &": {
-                        transform:
-                          "scale(1.05)",
-                      },
+                      transition: "transform .5s ease",
                     }}
                   />
 
@@ -242,7 +231,7 @@ const Rooms = () => {
                     }}
                   />
 
-                  {/* TYPE */}
+                  {/* ROOM TYPE */}
 
                   <Chip
                     label={room.type}
@@ -263,7 +252,7 @@ const Rooms = () => {
                     }}
                   />
 
-                  {/* VIEW */}
+                  {/* VIEW DETAILS */}
 
                   <Box
                     sx={{
@@ -276,10 +265,8 @@ const Rooms = () => {
                       px: 1.3,
                       py: 0.7,
                       borderRadius: 2,
-                      background:
-                        "rgba(255,255,255,.94)",
-                      backdropFilter:
-                        "blur(8px)",
+                      background: "rgba(255,255,255,.94)",
+                      backdropFilter: "blur(8px)",
                     }}
                   >
                     <VisibilityIcon
@@ -301,7 +288,7 @@ const Rooms = () => {
                   </Box>
                 </Box>
 
-                {/* CONTENT */}
+                {/* ================= CONTENT ================= */}
 
                 <CardContent
                   sx={{
@@ -311,6 +298,8 @@ const Rooms = () => {
                     flexDirection: "column",
                   }}
                 >
+                  {/* TITLE */}
+
                   <Typography
                     sx={{
                       fontSize: "1.2rem",
@@ -320,6 +309,39 @@ const Rooms = () => {
                   >
                     {room.title}
                   </Typography>
+
+                  {/* PRICE */}
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "baseline",
+                      gap: 0.6,
+                      mt: 0.8,
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: "1.4rem",
+                        fontWeight: 900,
+                        color: "#1565C0",
+                      }}
+                    >
+                      ₹{room.price.toLocaleString("en-IN")}
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        fontSize: "0.78rem",
+                        color: "#64748b",
+                        fontWeight: 600,
+                      }}
+                    >
+                      / month
+                    </Typography>
+                  </Box>
+
+                  {/* OCCUPANCY */}
 
                   <Box
                     sx={{
@@ -359,33 +381,27 @@ const Rooms = () => {
                     flexWrap="wrap"
                     sx={{ mb: 3 }}
                   >
-                    {room.amenities.map(
-                      (amenity) => (
-                        <Chip
-                          key={amenity}
-                          icon={getAmenityIcon(
-                            amenity
-                          )}
-                          label={amenity}
-                          size="small"
-                          sx={{
-                            height: 30,
-                            borderRadius: 1.8,
-                            background:
-                              "#f8fafc",
-                            border:
-                              "1px solid #e2e8f0",
-                            color: "#475569",
-                            fontWeight: 600,
+                    {room.amenities.map((amenity) => (
+                      <Chip
+                        key={amenity}
+                        icon={getAmenityIcon(amenity)}
+                        label={amenity}
+                        size="small"
+                        sx={{
+                          height: 30,
+                          borderRadius: 1.8,
+                          background: "#f8fafc",
+                          border:
+                            "1px solid #e2e8f0",
+                          color: "#475569",
+                          fontWeight: 600,
 
-                            "& .MuiChip-icon": {
-                              color:
-                                "#1565C0",
-                            },
-                          }}
-                        />
-                      )
-                    )}
+                          "& .MuiChip-icon": {
+                            color: "#1565C0",
+                          },
+                        }}
+                      />
+                    ))}
                   </Stack>
 
                   {/* BUTTON */}
@@ -393,14 +409,10 @@ const Rooms = () => {
                   <Button
                     fullWidth
                     variant="contained"
-                    endIcon={
-                      <ArrowForwardIcon />
-                    }
+                    endIcon={<ArrowForwardIcon />}
                     onClick={(event) => {
                       event.stopPropagation();
-                      handleAvailability(
-                        room
-                      );
+                      handleAvailability(room);
                     }}
                     sx={{
                       mt: "auto",
@@ -408,12 +420,10 @@ const Rooms = () => {
                       borderRadius: 2.5,
                       textTransform: "none",
                       fontWeight: 800,
-                      background:
-                        "#1565C0",
+                      background: "#1565C0",
 
                       "&:hover": {
-                        background:
-                          "#0D47A1",
+                        background: "#0D47A1",
                       },
                     }}
                   >
@@ -426,7 +436,7 @@ const Rooms = () => {
         </Grid>
 
         {/* ================================================= */}
-        {/* PROFESSIONAL ROOM DIALOG */}
+        {/* ROOM DETAILS DIALOG */}
         {/* ================================================= */}
 
         <Dialog
@@ -452,7 +462,7 @@ const Rooms = () => {
           {selectedRoom && (
             <Box>
 
-              {/* DIALOG IMAGE */}
+              {/* ================= DIALOG IMAGE ================= */}
 
               <Box
                 sx={{
@@ -502,8 +512,7 @@ const Rooms = () => {
                     color: "#0f172a",
 
                     "&:hover": {
-                      background:
-                        "#ffffff",
+                      background: "#ffffff",
                     },
                   }}
                 >
@@ -529,8 +538,7 @@ const Rooms = () => {
                     sx={{
                       mb: 1,
                       background:
-                        selectedRoom.type ===
-                        "AC"
+                        selectedRoom.type === "AC"
                           ? "#1565C0"
                           : "#334155",
                       color: "#ffffff",
@@ -554,7 +562,7 @@ const Rooms = () => {
                 </Box>
               </Box>
 
-              {/* DIALOG CONTENT */}
+              {/* ================= DIALOG CONTENT ================= */}
 
               <DialogContent
                 sx={{
@@ -572,22 +580,23 @@ const Rooms = () => {
                   spacing={2}
                   sx={{ mb: 3 }}
                 >
+
+                  {/* OCCUPANCY */}
+
                   <Grid
                     size={{
                       xs: 12,
-                      sm: 6,
+                      sm: 4,
                     }}
                   >
                     <Box
                       sx={{
                         display: "flex",
-                        alignItems:
-                          "center",
+                        alignItems: "center",
                         gap: 1.5,
                         p: 1.7,
                         borderRadius: 2.5,
-                        background:
-                          "#f8fafc",
+                        background: "#f8fafc",
                         border:
                           "1px solid #e2e8f0",
                       }}
@@ -598,14 +607,10 @@ const Rooms = () => {
                           height: 42,
                           borderRadius: 2,
                           display: "flex",
-                          alignItems:
-                            "center",
-                          justifyContent:
-                            "center",
-                          background:
-                            "#eff6ff",
-                          color:
-                            "#1565C0",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          background: "#eff6ff",
+                          color: "#1565C0",
                         }}
                       >
                         <PersonIcon />
@@ -614,13 +619,10 @@ const Rooms = () => {
                       <Box>
                         <Typography
                           sx={{
-                            fontSize:
-                              "0.7rem",
+                            fontSize: "0.7rem",
                             fontWeight: 800,
-                            color:
-                              "#94a3b8",
-                            letterSpacing:
-                              0.5,
+                            color: "#94a3b8",
+                            letterSpacing: 0.5,
                           }}
                         >
                           OCCUPANCY
@@ -629,34 +631,31 @@ const Rooms = () => {
                         <Typography
                           sx={{
                             fontWeight: 800,
-                            color:
-                              "#0f172a",
+                            color: "#0f172a",
                           }}
                         >
-                          {
-                            selectedRoom.occupancy
-                          }
+                          {selectedRoom.occupancy}
                         </Typography>
                       </Box>
                     </Box>
                   </Grid>
 
+                  {/* ROOM TYPE */}
+
                   <Grid
                     size={{
                       xs: 12,
-                      sm: 6,
+                      sm: 4,
                     }}
                   >
                     <Box
                       sx={{
                         display: "flex",
-                        alignItems:
-                          "center",
+                        alignItems: "center",
                         gap: 1.5,
                         p: 1.7,
                         borderRadius: 2.5,
-                        background:
-                          "#f8fafc",
+                        background: "#f8fafc",
                         border:
                           "1px solid #e2e8f0",
                       }}
@@ -667,10 +666,8 @@ const Rooms = () => {
                           height: 42,
                           borderRadius: 2,
                           display: "flex",
-                          alignItems:
-                            "center",
-                          justifyContent:
-                            "center",
+                          alignItems: "center",
+                          justifyContent: "center",
                           background:
                             selectedRoom.type ===
                             "AC"
@@ -694,13 +691,10 @@ const Rooms = () => {
                       <Box>
                         <Typography
                           sx={{
-                            fontSize:
-                              "0.7rem",
+                            fontSize: "0.7rem",
                             fontWeight: 800,
-                            color:
-                              "#94a3b8",
-                            letterSpacing:
-                              0.5,
+                            color: "#94a3b8",
+                            letterSpacing: 0.5,
                           }}
                         >
                           ROOM TYPE
@@ -709,13 +703,74 @@ const Rooms = () => {
                         <Typography
                           sx={{
                             fontWeight: 800,
-                            color:
-                              "#0f172a",
+                            color: "#0f172a",
                           }}
                         >
-                          {
-                            selectedRoom.type
-                          }
+                          {selectedRoom.type}
+                        </Typography>
+                      </Box>
+                    </Box>
+                  </Grid>
+
+                  {/* PRICE */}
+
+                  <Grid
+                    size={{
+                      xs: 12,
+                      sm: 4,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1.5,
+                        p: 1.7,
+                        borderRadius: 2.5,
+                        background: "#f8fafc",
+                        border:
+                          "1px solid #e2e8f0",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: 42,
+                          height: 42,
+                          borderRadius: 2,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          background: "#eff6ff",
+                          color: "#1565C0",
+                          fontWeight: 900,
+                          fontSize: "1.1rem",
+                        }}
+                      >
+                        ₹
+                      </Box>
+
+                      <Box>
+                        <Typography
+                          sx={{
+                            fontSize: "0.7rem",
+                            fontWeight: 800,
+                            color: "#94a3b8",
+                            letterSpacing: 0.5,
+                          }}
+                        >
+                          MONTHLY PRICE
+                        </Typography>
+
+                        <Typography
+                          sx={{
+                            fontWeight: 900,
+                            color: "#1565C0",
+                          }}
+                        >
+                          ₹
+                          {selectedRoom.price.toLocaleString(
+                            "en-IN"
+                          )}
                         </Typography>
                       </Box>
                     </Box>
@@ -724,7 +779,7 @@ const Rooms = () => {
 
                 <Divider sx={{ mb: 3 }} />
 
-                {/* FACILITIES */}
+                {/* ================= FACILITIES ================= */}
 
                 <Typography
                   sx={{
@@ -751,13 +806,11 @@ const Rooms = () => {
                           sx={{
                             minHeight: 58,
                             display: "flex",
-                            alignItems:
-                              "center",
+                            alignItems: "center",
                             gap: 1.2,
                             px: 1.5,
                             borderRadius: 2.5,
-                            background:
-                              "#ffffff",
+                            background: "#ffffff",
                             border:
                               "1px solid #e2e8f0",
                           }}
@@ -768,15 +821,11 @@ const Rooms = () => {
                               height: 34,
                               minWidth: 34,
                               display: "flex",
-                              alignItems:
-                                "center",
-                              justifyContent:
-                                "center",
+                              alignItems: "center",
+                              justifyContent: "center",
                               borderRadius: 1.8,
-                              background:
-                                "#eff6ff",
-                              color:
-                                "#1565C0",
+                              background: "#eff6ff",
+                              color: "#1565C0",
                             }}
                           >
                             {getAmenityIcon(
@@ -786,11 +835,9 @@ const Rooms = () => {
 
                           <Typography
                             sx={{
-                              fontSize:
-                                "0.83rem",
+                              fontSize: "0.83rem",
                               fontWeight: 700,
-                              color:
-                                "#475569",
+                              color: "#475569",
                             }}
                           >
                             {amenity}
@@ -801,42 +848,36 @@ const Rooms = () => {
                   )}
                 </Grid>
 
-                {/* DESCRIPTION */}
+                {/* ================= DESCRIPTION ================= */}
 
                 <Box
                   sx={{
                     mt: 3,
                     p: 2,
                     borderRadius: 2.5,
-                    background:
-                      "#f8fafc",
+                    background: "#f8fafc",
                   }}
                 >
                   <Typography
                     sx={{
                       color: "#64748b",
                       lineHeight: 1.75,
-                      fontSize:
-                        "0.9rem",
+                      fontSize: "0.9rem",
                     }}
                   >
-                    A clean and comfortable
-                    room at Skyline PG with
-                    essential facilities for a
-                    convenient and peaceful
-                    stay.
+                    A clean and comfortable room at
+                    Skyline PG with essential facilities
+                    for a convenient and peaceful stay.
                   </Typography>
                 </Box>
 
-                {/* CTA */}
+                {/* ================= CTA ================= */}
 
                 <Button
                   fullWidth
                   variant="contained"
                   size="large"
-                  endIcon={
-                    <ArrowForwardIcon />
-                  }
+                  endIcon={<ArrowForwardIcon />}
                   onClick={() =>
                     handleAvailability(
                       selectedRoom
@@ -849,12 +890,10 @@ const Rooms = () => {
                     textTransform: "none",
                     fontWeight: 800,
                     fontSize: "0.98rem",
-                    background:
-                      "#1565C0",
+                    background: "#1565C0",
 
                     "&:hover": {
-                      background:
-                        "#0D47A1",
+                      background: "#0D47A1",
                     },
                   }}
                 >
@@ -865,6 +904,7 @@ const Rooms = () => {
             </Box>
           )}
         </Dialog>
+
       </Container>
     </Box>
   );

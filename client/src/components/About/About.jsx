@@ -4,389 +4,358 @@ import {
   Typography,
   Grid,
   Paper,
-  Stack,
 } from "@mui/material";
 
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import SecurityIcon from "@mui/icons-material/Security";
+import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
+// import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+// import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
+import TvIcon from "@mui/icons-material/Tv";
 import WifiIcon from "@mui/icons-material/Wifi";
-import RestaurantIcon from "@mui/icons-material/Restaurant";
-import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
-
-const highlights = [
-  {
-    icon: <SecurityIcon />,
-    title: "Safe & Secure",
-    text: "A peaceful and secure environment for comfortable everyday living.",
-  },
-  {
-    icon: <WifiIcon />,
-    title: "High-Speed Wi-Fi",
-    text: "Reliable internet connectivity for work, study and entertainment.",
-  },
-  {
-    icon: <RestaurantIcon />,
-    title: "Hygienic Food",
-    text: "Fresh and hygienically prepared food for a convenient stay.",
-  },
-  {
-    icon: <CleaningServicesIcon />,
-    title: "Clean & Maintained",
-    text: "Clean rooms and well-maintained common areas for a better experience.",
-  },
-];
+import BedIcon from "@mui/icons-material/Bed";
+import WaterDropIcon from "@mui/icons-material/WaterDrop";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
 
 const About = () => {
+  const highlights = [
+    {
+      icon: <HomeWorkOutlinedIcon />,
+      title: "Comfortable Rooms",
+      text: "Clean and well-maintained rooms for a comfortable stay.",
+    },
+    {
+      icon: <BedIcon />,
+      title: "1, 2 & 3 Bed Options",
+      text: "Choose a room based on your preferred sharing requirement.",
+    },
+    {
+      icon: <AcUnitIcon />,
+      title: "AC & Non-AC",
+      text: "AC and Non-AC room options are available.",
+    },
+    {
+      icon: <TvIcon />,
+      title: "TV in Rooms",
+      text: "Rooms are provided with TV for your everyday entertainment.",
+    },
+    {
+      icon: <WaterDropIcon />,
+      title: "Hot Water",
+      text: "Hot water facility is available for comfortable daily living.",
+    },
+    {
+      icon: <SecurityOutlinedIcon />,
+      title: "Secure Environment",
+      text: "A peaceful and secure environment for residents.",
+    },
+  ];
+
   return (
     <Box
       id="about"
       component="section"
       sx={{
+        background: "#ffffff",
         py: { xs: 8, md: 12 },
-        backgroundColor: "#ffffff",
       }}
     >
       <Container maxWidth="lg">
 
-        {/* SECTION HEADING */}
+        {/* ================= HEADER ================= */}
+
         <Box
           sx={{
             textAlign: "center",
             maxWidth: 760,
             mx: "auto",
-            mb: { xs: 6, md: 9 },
+            mb: { xs: 5, md: 8 },
           }}
         >
           <Typography
             sx={{
               color: "#1565C0",
               fontWeight: 800,
-              letterSpacing: 1.5,
-              fontSize: "0.9rem",
+              letterSpacing: 2,
+              fontSize: "0.82rem",
+              mb: 1.5,
             }}
           >
             ABOUT SKYLINE PG
           </Typography>
 
           <Typography
-            variant="h2"
+            component="h2"
             sx={{
-              mt: 1.5,
-              fontWeight: 900,
               color: "#0f172a",
+              fontWeight: 800,
               fontSize: {
-                xs: "2rem",
-                sm: "2.5rem",
-                md: "3.2rem",
+                xs: "2.2rem",
+                sm: "2.7rem",
+                md: "3.3rem",
               },
               lineHeight: 1.15,
             }}
           >
-            Comfortable Living.
+            A Comfortable Place
             <br />
             <Box
               component="span"
-              sx={{ color: "#1565C0" }}
+              sx={{
+                color: "#1565C0",
+              }}
             >
-              Better Experience.
+              To Call Your Stay
             </Box>
           </Typography>
 
           <Typography
             sx={{
-              mt: 2.5,
+              mt: 2,
               color: "#64748b",
+              lineHeight: 1.8,
               fontSize: {
                 xs: "0.95rem",
-                md: "1.05rem",
+                md: "1.02rem",
               },
-              lineHeight: 1.8,
             }}
           >
-            Skyline PG provides a clean, comfortable and
-            peaceful living environment for students and
-            working professionals. We focus on the facilities
-            that make everyday life convenient and stress-free.
+            Skyline PG offers clean, comfortable and convenient
+            accommodation near TCS Adibatla, Hyderabad. Our rooms
+            are designed for peaceful everyday living with essential
+            facilities and different sharing options.
           </Typography>
         </Box>
 
-        {/* ABOUT CONTENT */}
+        {/* ================= MAIN ABOUT ================= */}
+
         <Grid
           container
-          spacing={{ xs: 5, md: 8 }}
-          alignItems="center"
+          spacing={{ xs: 3, md: 5 }}
+          alignItems="stretch"
         >
+          {/* LEFT IMAGE */}
 
-          {/* IMAGE */}
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Box
+          <Grid size={{ xs: 12, md: 5 }}>
+            <Paper
+              elevation={0}
               sx={{
-                position: "relative",
-                height: {
-                  xs: 340,
-                  sm: 430,
-                  md: 520,
-                },
-                borderRadius: 5,
+                height: "100%",
+                minHeight: { xs: 300, md: 500 },
+                borderRadius: 4,
                 overflow: "hidden",
-                boxShadow:
-                  "0 20px 50px rgba(15,23,42,0.12)",
+                border: "1px solid #e2e8f0",
+                position: "relative",
               }}
             >
               <Box
                 component="img"
-                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=90"
-                alt="Comfortable PG living area"
+                src="/images/about/skyline-building.png"
+                alt="Skyline PG building"
                 sx={{
                   width: "100%",
                   height: "100%",
+                  minHeight: { xs: 300, md: 500 },
                   objectFit: "cover",
                   display: "block",
                 }}
               />
 
-              {/* IMAGE LABEL */}
+              {/* IMAGE OVERLAY */}
+
               <Box
                 sx={{
                   position: "absolute",
-                  left: { xs: 16, md: 24 },
-                  right: { xs: 16, md: 24 },
-                  bottom: { xs: 16, md: 24 },
-                  p: 2.5,
-                  borderRadius: 3,
-                  backgroundColor: "rgba(255,255,255,0.94)",
-                  backdropFilter: "blur(10px)",
+                  inset: 0,
+                  background:
+                    "linear-gradient(180deg, transparent 45%, rgba(15,23,42,.75) 100%)",
+                }}
+              />
+
+              {/* IMAGE TEXT */}
+
+              <Box
+                sx={{
+                  position: "absolute",
+                  left: { xs: 20, md: 28 },
+                  right: { xs: 20, md: 28 },
+                  bottom: { xs: 20, md: 28 },
                 }}
               >
                 <Typography
-                  fontWeight={800}
-                  color="#0f172a"
+                  sx={{
+                    color: "#ffffff",
+                    fontWeight: 800,
+                    fontSize: {
+                      xs: "1.4rem",
+                      md: "1.7rem",
+                    },
+                  }}
                 >
                   Skyline PG
                 </Typography>
 
                 <Typography
-                  color="#64748b"
-                  fontSize="0.9rem"
-                  mt={0.5}
+                  sx={{
+                    mt: 0.5,
+                    color: "rgba(255,255,255,.85)",
+                    fontSize: "0.9rem",
+                  }}
                 >
-                  Clean • Comfortable • Convenient
+                  TCS Adibatla • Hyderabad
+                </Typography>
+              </Box>
+            </Paper>
+          </Grid>
+
+          {/* RIGHT CONTENT */}
+
+          <Grid size={{ xs: 12, md: 7 }}>
+            <Box
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#0f172a",
+                  fontWeight: 800,
+                  fontSize: {
+                    xs: "1.7rem",
+                    md: "2.2rem",
+                  },
+                  lineHeight: 1.25,
+                }}
+              >
+                Everything you need
+                <br />
+                for a comfortable stay.
+              </Typography>
+
+              <Typography
+                sx={{
+                  mt: 2,
+                  color: "#64748b",
+                  lineHeight: 1.8,
+                }}
+              >
+                Whether you are looking for a single room or a
+                sharing option, Skyline PG provides practical room
+                choices with essential facilities for everyday
+                living.
+              </Typography>
+
+              {/* HIGHLIGHTS */}
+
+              <Grid
+                container
+                spacing={2}
+                sx={{
+                  mt: 2,
+                }}
+              >
+                {highlights.map((item, index) => (
+                  <Grid
+                    size={{
+                      xs: 12,
+                      sm: 6,
+                    }}
+                    key={index}
+                  >
+                    <Paper
+                      elevation={0}
+                      sx={{
+                        height: "100%",
+                        p: 2.2,
+                        borderRadius: 3,
+                        border: "1px solid #e2e8f0",
+                        background: "#f8fafc",
+                        transition: "all .25s ease",
+
+                        "&:hover": {
+                          transform: "translateY(-3px)",
+                          borderColor: "#90caf9",
+                          boxShadow:
+                            "0 10px 25px rgba(15,23,42,.08)",
+                        },
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          width: 44,
+                          height: 44,
+                          borderRadius: 2.5,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          background: "#eff6ff",
+                          color: "#1565C0",
+                          mb: 1.5,
+                        }}
+                      >
+                        {item.icon}
+                      </Box>
+
+                      <Typography
+                        sx={{
+                          color: "#0f172a",
+                          fontWeight: 800,
+                          fontSize: "0.95rem",
+                        }}
+                      >
+                        {item.title}
+                      </Typography>
+
+                      <Typography
+                        sx={{
+                          mt: 0.6,
+                          color: "#64748b",
+                          fontSize: "0.82rem",
+                          lineHeight: 1.6,
+                        }}
+                      >
+                        {item.text}
+                      </Typography>
+                    </Paper>
+                  </Grid>
+                ))}
+              </Grid>
+
+              {/* SMALL INFO */}
+
+              <Box
+                sx={{
+                  mt: 3,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1.5,
+                  p: 2,
+                  borderRadius: 3,
+                  background: "#f1f5f9",
+                }}
+              >
+                <BedIcon
+                  sx={{
+                    color: "#1565C0",
+                  }}
+                />
+
+                <Typography
+                  sx={{
+                    color: "#475569",
+                    fontSize: "0.88rem",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Suitable for students and working professionals
+                  looking for a peaceful stay near Adibatla.
                 </Typography>
               </Box>
             </Box>
           </Grid>
-
-          {/* TEXT */}
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Typography
-              sx={{
-                color: "#1565C0",
-                fontWeight: 700,
-                letterSpacing: 1,
-                mb: 1,
-              }}
-            >
-              OUR APPROACH
-            </Typography>
-
-            <Typography
-              variant="h3"
-              sx={{
-                fontWeight: 900,
-                color: "#0f172a",
-                fontSize: {
-                  xs: "1.8rem",
-                  md: "2.5rem",
-                },
-                lineHeight: 1.25,
-                mb: 2.5,
-              }}
-            >
-              More Than Just
-              <br />
-              A Place to Stay
-            </Typography>
-
-            <Typography
-              sx={{
-                color: "#64748b",
-                lineHeight: 1.85,
-                mb: 2,
-              }}
-            >
-              At Skyline PG, our goal is to provide residents
-              with a comfortable place where they can focus
-              on their work, studies and personal life.
-            </Typography>
-
-            <Typography
-              sx={{
-                color: "#64748b",
-                lineHeight: 1.85,
-                mb: 3.5,
-              }}
-            >
-              From hygienic food and Wi-Fi to clean surroundings
-              and a secure environment, we bring essential
-              facilities together to make your stay convenient.
-            </Typography>
-
-            {/* CHECK LIST */}
-            <Stack spacing={1.8}>
-              {[
-                "Clean and well-maintained premises",
-                "Comfortable accommodation",
-                "Hygienic food facilities",
-                "Essential amenities for daily living",
-              ].map((item) => (
-                <Box
-                  key={item}
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 1.5,
-                  }}
-                >
-                  <CheckCircleIcon
-                    sx={{
-                      color: "#16a34a",
-                      fontSize: 22,
-                    }}
-                  />
-
-                  <Typography
-                    fontWeight={600}
-                    color="#334155"
-                  >
-                    {item}
-                  </Typography>
-                </Box>
-              ))}
-            </Stack>
-          </Grid>
         </Grid>
-
-        {/* WHY CHOOSE US */}
-        <Box
-          sx={{
-            mt: { xs: 9, md: 13 },
-          }}
-        >
-          <Box
-            sx={{
-              textAlign: "center",
-              maxWidth: 700,
-              mx: "auto",
-              mb: { xs: 5, md: 6 },
-            }}
-          >
-            <Typography
-              sx={{
-                color: "#1565C0",
-                fontWeight: 800,
-                letterSpacing: 1.5,
-                fontSize: "0.9rem",
-              }}
-            >
-              WHY CHOOSE US
-            </Typography>
-
-            <Typography
-              variant="h3"
-              sx={{
-                mt: 1.5,
-                fontWeight: 900,
-                color: "#0f172a",
-                fontSize: {
-                  xs: "1.8rem",
-                  md: "2.5rem",
-                },
-              }}
-            >
-              Everything You Need
-            </Typography>
-
-            <Typography
-              sx={{
-                mt: 1.5,
-                color: "#64748b",
-                lineHeight: 1.7,
-              }}
-            >
-              Designed around comfort, cleanliness,
-              convenience and peace of mind.
-            </Typography>
-          </Box>
-
-          {/* 2 x 2 CARDS */}
-          <Grid
-            container
-            spacing={{ xs: 2.5, md: 3 }}
-          >
-            {highlights.map((item) => (
-              <Grid
-                size={{ xs: 12, sm: 6 }}
-                key={item.title}
-              >
-                <Paper
-                  elevation={0}
-                  sx={{
-                    p: { xs: 3, md: 3.5 },
-                    minHeight: 190,
-                    height: "100%",
-                    borderRadius: 4,
-                    border: "1px solid #e2e8f0",
-                    backgroundColor: "#ffffff",
-                    transition: "all 0.3s ease",
-
-                    "&:hover": {
-                      transform: "translateY(-6px)",
-                      borderColor: "#90caf9",
-                      boxShadow:
-                        "0 18px 40px rgba(15,23,42,0.09)",
-                    },
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: 52,
-                      height: 52,
-                      borderRadius: 2.5,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      backgroundColor: "#eff6ff",
-                      color: "#1565C0",
-                      mb: 2.5,
-                    }}
-                  >
-                    {item.icon}
-                  </Box>
-
-                  <Typography
-                    fontWeight={800}
-                    fontSize="1.1rem"
-                    color="#0f172a"
-                  >
-                    {item.title}
-                  </Typography>
-
-                  <Typography
-                    sx={{
-                      mt: 1,
-                      color: "#64748b",
-                      lineHeight: 1.7,
-                      fontSize: "0.92rem",
-                    }}
-                  >
-                    {item.text}
-                  </Typography>
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-
       </Container>
     </Box>
   );

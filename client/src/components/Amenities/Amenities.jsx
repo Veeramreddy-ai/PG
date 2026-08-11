@@ -14,6 +14,7 @@ import SecurityIcon from "@mui/icons-material/Security";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
 import LocalLaundryServiceIcon from "@mui/icons-material/LocalLaundryService";
 import BedIcon from "@mui/icons-material/Bed";
+import TvIcon from "@mui/icons-material/Tv";
 
 const amenities = [
   {
@@ -29,6 +30,12 @@ const amenities = [
       "Comfortable air-conditioned rooms designed for a pleasant stay.",
   },
   {
+    icon: <TvIcon />,
+    title: "TV in Rooms",
+    description:
+      "Enjoy TV entertainment in your room during your free time.",
+  },
+  {
     icon: <RestaurantIcon />,
     title: "Hygienic Food",
     description:
@@ -36,15 +43,15 @@ const amenities = [
   },
   {
     icon: <WaterDropIcon />,
-    title: "24/7 Water",
+    title: "Hot Water",
     description:
-      "Reliable water availability for your daily needs.",
+      "Hot water facility available for a comfortable daily routine.",
   },
   {
     icon: <SecurityIcon />,
-    title: "Security",
+    title: "Secure Environment",
     description:
-      "A safe and peaceful environment for all residents.",
+      "A safe and peaceful environment designed for comfortable living.",
   },
   {
     icon: <CleaningServicesIcon />,
@@ -60,9 +67,9 @@ const amenities = [
   },
   {
     icon: <BedIcon />,
-    title: "Comfortable Stay",
+    title: "Comfortable Beds",
     description:
-      "Well-equipped rooms focused on comfort and convenience.",
+      "Well-maintained beds designed for comfortable everyday living.",
   },
 ];
 
@@ -78,7 +85,8 @@ const Amenities = () => {
     >
       <Container maxWidth="lg">
 
-        {/* SECTION HEADER */}
+        {/* ================= HEADER ================= */}
+
         <Box
           sx={{
             textAlign: "center",
@@ -91,32 +99,36 @@ const Amenities = () => {
             sx={{
               color: "#1565C0",
               fontWeight: 800,
-              letterSpacing: 1.5,
-              fontSize: "0.9rem",
+              letterSpacing: 1.8,
+              fontSize: "0.85rem",
             }}
           >
             AMENITIES
           </Typography>
 
           <Typography
-            variant="h2"
+            component="h2"
             sx={{
               mt: 1.5,
               fontWeight: 900,
               color: "#0f172a",
               fontSize: {
                 xs: "2rem",
-                sm: "2.5rem",
-                md: "3.2rem",
+                sm: "2.6rem",
+                md: "3.3rem",
               },
               lineHeight: 1.15,
+              letterSpacing: "-0.035em",
             }}
           >
             Everything You Need
             <br />
+
             <Box
               component="span"
-              sx={{ color: "#1565C0" }}
+              sx={{
+                color: "#1565C0",
+              }}
             >
               Under One Roof
             </Box>
@@ -133,34 +145,43 @@ const Amenities = () => {
               },
             }}
           >
-            From everyday essentials to comfort-focused
-            facilities, Skyline PG provides the amenities
-            you need for a convenient and hassle-free stay.
+            From everyday essentials to comfort-focused facilities,
+            Skyline PG provides the facilities you need for a
+            convenient and hassle-free stay.
           </Typography>
         </Box>
 
-        {/* AMENITIES GRID */}
+        {/* ================= AMENITIES GRID ================= */}
+
         <Grid
           container
-          spacing={{ xs: 2.5, sm: 3, md: 3 }}
+          spacing={{ xs: 2.5, sm: 3 }}
         >
           {amenities.map((amenity) => (
             <Grid
-              size={{ xs: 12, sm: 6, md: 3 }}
+              size={{
+                xs: 12,
+                sm: 6,
+                md: 4,
+              }}
               key={amenity.title}
             >
               <Paper
                 elevation={0}
                 sx={{
                   height: "100%",
-                  minHeight: 235,
-                  p: { xs: 3, md: 3.2 },
+                  minHeight: 230,
+                  p: {
+                    xs: 3,
+                    md: 3.5,
+                  },
                   borderRadius: 4,
-                  border: "1px solid #e2e8f0",
                   backgroundColor: "#ffffff",
-                  transition: "all 0.3s ease",
+                  border: "1px solid #e2e8f0",
                   position: "relative",
                   overflow: "hidden",
+                  transition:
+                    "transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
 
                   "&::before": {
                     content: '""',
@@ -176,22 +197,30 @@ const Amenities = () => {
                   },
 
                   "&:hover": {
-                    transform: "translateY(-7px)",
-                    boxShadow:
-                      "0 18px 40px rgba(15, 23, 42, 0.09)",
+                    transform: "translateY(-6px)",
                     borderColor: "#bfdbfe",
+                    boxShadow:
+                      "0 18px 40px rgba(15, 23, 42, 0.10)",
 
                     "&::before": {
                       transform: "scaleX(1)",
+                    },
+
+                    "& .amenity-icon": {
+                      transform: "scale(1.08)",
+                      backgroundColor: "#1565C0",
+                      color: "#ffffff",
                     },
                   },
                 }}
               >
                 {/* ICON */}
+
                 <Box
+                  className="amenity-icon"
                   sx={{
-                    width: 54,
-                    height: 54,
+                    width: 56,
+                    height: 56,
                     borderRadius: 3,
                     display: "flex",
                     alignItems: "center",
@@ -199,21 +228,27 @@ const Amenities = () => {
                     backgroundColor: "#eff6ff",
                     color: "#1565C0",
                     mb: 2.5,
+                    transition:
+                      "all 0.3s ease",
                   }}
                 >
                   {amenity.icon}
                 </Box>
 
                 {/* TITLE */}
+
                 <Typography
-                  fontWeight={800}
-                  fontSize="1.05rem"
-                  color="#0f172a"
+                  sx={{
+                    fontWeight: 800,
+                    fontSize: "1.05rem",
+                    color: "#0f172a",
+                  }}
                 >
                   {amenity.title}
                 </Typography>
 
                 {/* DESCRIPTION */}
+
                 <Typography
                   sx={{
                     mt: 1.2,
@@ -229,15 +264,22 @@ const Amenities = () => {
           ))}
         </Grid>
 
-        {/* BOTTOM HIGHLIGHT */}
+        {/* ================= BOTTOM HIGHLIGHT ================= */}
+
         <Paper
           elevation={0}
           sx={{
-            mt: { xs: 5, md: 7 },
-            p: { xs: 3, md: 4 },
+            mt: {
+              xs: 5,
+              md: 7,
+            },
+            p: {
+              xs: 3,
+              md: 4,
+            },
             borderRadius: 4,
             background:
-              "linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%)",
+              "linear-gradient(135deg, #eff6ff 0%, #ffffff 100%)",
             border: "1px solid #dbeafe",
           }}
         >
@@ -246,17 +288,24 @@ const Amenities = () => {
             spacing={3}
             alignItems="center"
           >
-            <Grid size={{ xs: 12, md: 8 }}>
+            <Grid
+              size={{
+                xs: 12,
+                md: 8,
+              }}
+            >
               <Typography
-                fontWeight={800}
-                fontSize={{
-                  xs: "1.15rem",
-                  md: "1.35rem",
+                sx={{
+                  fontWeight: 800,
+                  fontSize: {
+                    xs: "1.15rem",
+                    md: "1.35rem",
+                  },
+                  color: "#0f172a",
                 }}
-                color="#0f172a"
               >
-                A comfortable stay starts with the right
-                facilities.
+                Comfortable living starts with
+                the right facilities.
               </Typography>
 
               <Typography
@@ -266,13 +315,18 @@ const Amenities = () => {
                   lineHeight: 1.7,
                 }}
               >
-                Skyline PG brings essential amenities together
-                so you can focus on what matters most.
+                Skyline PG brings essential
+                amenities together so you can
+                enjoy a comfortable and convenient
+                everyday stay.
               </Typography>
             </Grid>
 
             <Grid
-              size={{ xs: 12, md: 4 }}
+              size={{
+                xs: 12,
+                md: 4,
+              }}
               sx={{
                 display: "flex",
                 justifyContent: {
@@ -291,9 +345,11 @@ const Amenities = () => {
                 }}
               >
                 <Typography
-                  fontWeight={800}
-                  color="#1565C0"
-                  fontSize="0.9rem"
+                  sx={{
+                    fontWeight: 800,
+                    color: "#1565C0",
+                    fontSize: "0.85rem",
+                  }}
                 >
                   Comfort • Cleanliness • Convenience
                 </Typography>
