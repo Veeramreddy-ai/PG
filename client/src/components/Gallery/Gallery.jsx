@@ -29,6 +29,11 @@ const galleryImages = [
     category: "Interior",
   },
   {
+    src: "/images/gallery/nightview.png",
+    title: "Night View",
+    category: "Exterior",
+  },
+  {
     src: "/images/gallery/liftfacility.png",
     title: "Lift Facility",
     category: "Facilities",
@@ -52,6 +57,11 @@ const galleryImages = [
     src: "/images/gallery/nonac3sharing.png",
     title: "Non-AC 3 Sharing Room",
     category: "Rooms",
+  },
+  {
+    src: "/images/gallery/nightview2.png",
+    title: "Night View",
+    category: "Exterior",
   },
 ];
 

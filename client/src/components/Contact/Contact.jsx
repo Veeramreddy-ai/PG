@@ -398,35 +398,49 @@ Please get back to me regarding my enquiry.
                   </Typography>
 
                   <Typography
-                    sx={{
-                      color: "#64748b",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    TCS Adibatla, Plot No. 101,
-                    <br />
-                    Hyderabad, Bongloor,
-                    <br />
-                    Telangana 501510
-                  </Typography>
+  sx={{
+    color: "#64748b",
+    lineHeight: 1.55,
+    mb: 0.2,
+  }}
+>
+  TCS Adibatla, Plot No. 101,
+  <br />
+  Hyderabad, Bongloor,
+  <br />
+  Telangana 501510
+</Typography>
 
-                  <Button
-                    variant="text"
-                    size="small"
-                    href={mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    endIcon={<ArrowOutwardIcon />}
-                    sx={{
-                      mt: 1,
-                      px: 0,
-                      fontWeight: 800,
-                      color: "#1565C0",
-                      textTransform: "none",
-                    }}
-                  >
-                    View on Google Maps
-                  </Button>
+<Button
+  variant="text"
+  size="small"
+  href={mapUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  endIcon={<ArrowOutwardIcon />}
+  sx={{
+    mt: 0,
+    px: 0,
+    minHeight: "auto",
+    height: 28,
+    fontWeight: 800,
+    color: "#1565C0",
+    textTransform: "none",
+    alignSelf: "flex-start",
+    justifyContent: "flex-start",
+
+    "& .MuiButton-endIcon": {
+      ml: 0.5,
+    },
+
+    "&:hover": {
+      backgroundColor: "transparent",
+      color: "#0D47A1",
+    },
+  }}
+>
+  View on Google Maps
+</Button>
                 </Box>
               </Box>
             </Paper>

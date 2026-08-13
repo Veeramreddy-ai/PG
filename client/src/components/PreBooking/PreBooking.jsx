@@ -12,6 +12,7 @@ import {
   Stack,
   Divider,
   Chip,
+  Alert,
 } from "@mui/material";
 
 import PersonIcon from "@mui/icons-material/Person";
@@ -26,20 +27,89 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import dayjs from "dayjs";
-import {
-  LocalizationProvider,
-} from "@mui/x-date-pickers/LocalizationProvider";
-import {
-  AdapterDayjs,
-} from "@mui/x-date-pickers/AdapterDayjs";
-import {
-  DatePicker,
-} from "@mui/x-date-pickers/DatePicker";
+
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
+/*
+=====================================================
+BACKEND URL
+=====================================================
+
+Frontend .env:
+
+VITE_API_URL=https://YOUR-RENDER-BACKEND.onrender.com
+
+For local development:
+
+VITE_API_URL=http://localhost:5000
+*/
+
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+/*
+=====================================================
+WHATSAPP NUMBER
+=====================================================
+*/
 
 const whatsappNumber = "917095769276";
 
+/*
+=====================================================
+ROOMS
+=====================================================
+*/
+
+const roomOptions = [
+  {
+    title: "AC 1 Sharing",
+    type: "AC",
+    occupancy: "1 Person",
+    price: 21000,
+  },
+  {
+    title: "AC 2 Sharing",
+    type: "AC",
+    occupancy: "2 Persons",
+    price: 10500,
+  },
+  {
+    title: "AC 3 Sharing",
+    type: "AC",
+    occupancy: "3 Persons",
+    price: 8500,
+  },
+  {
+    title: "Non-AC 1 Sharing",
+    type: "Non-AC",
+    occupancy: "1 Person",
+    price: 18000,
+  },
+  {
+    title: "Non-AC 2 Sharing",
+    type: "Non-AC",
+    occupancy: "2 Persons",
+    price: 9000,
+  },
+  {
+    title: "Non-AC 3 Sharing",
+    type: "Non-AC",
+    occupancy: "3 Persons",
+    price: 7000,
+  },
+];
+
 const PreBooking = () => {
   const [selectedRoom, setSelectedRoom] = useState(null);
+
+  const [loading, setLoading] = useState(false);
+
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -51,20 +121,27 @@ const PreBooking = () => {
     message: "",
   });
 
-  // =====================================================
-  // ROOM SELECTION FROM ROOMS SECTION
-  // =====================================================
+  /*
+  =====================================================
+  ROOM SELECTION FROM ROOMS SECTION
+  =====================================================
+  */
 
   useEffect(() => {
     const handleRoomSelection = (event) => {
       const room = event.detail;
 
+      if (!room) return;
+
       setSelectedRoom(room);
 
       setFormData((prev) => ({
         ...prev,
-        room: room?.title || "",
+        room: room.title || "",
       }));
+
+      setSuccessMessage("");
+      setErrorMessage("");
     };
 
     window.addEventListener(
@@ -80,9 +157,11 @@ const PreBooking = () => {
     };
   }, []);
 
-  // =====================================================
-  // INPUT CHANGE
-  // =====================================================
+  /*
+  =====================================================
+  INPUT CHANGE
+  =====================================================
+  */
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -91,71 +170,253 @@ const PreBooking = () => {
       ...prev,
       [name]: value,
     }));
+
+    setSuccessMessage("");
+    setErrorMessage("");
   };
 
-  // =====================================================
-  // ROOM CHANGE
-  // =====================================================
+  /*
+  =====================================================
+  ROOM CHANGE
+  =====================================================
+  */
 
   const handleRoomChange = (event) => {
     const roomTitle = event.target.value;
+
+    const room = roomOptions.find(
+      (item) => item.title === roomTitle
+    );
 
     setFormData((prev) => ({
       ...prev,
       room: roomTitle,
     }));
 
-    /*
-      If user manually changes room from dropdown,
-      selectedRoom card will be removed because
-      the exact room object is not available here.
-    */
+    setSelectedRoom(room || null);
 
-    setSelectedRoom(null);
+    setSuccessMessage("");
+    setErrorMessage("");
   };
 
-  // =====================================================
-  // WHATSAPP MESSAGE
-  // =====================================================
+  /*
+  =====================================================
+  PHONE VALIDATION
+  =====================================================
+  */
+
+  const isValidPhone = (phone) => {
+    return /^[6-9]\d{9}$/.test(phone);
+  };
+
+  /*
+  =====================================================
+  WHATSAPP MESSAGE
+  =====================================================
+  */
 
   const createWhatsAppMessage = () => {
+    const room =
+      selectedRoom ||
+      roomOptions.find(
+        (item) => item.title === formData.room
+      );
+
+    const rent = room
+      ? `₹${room.price.toLocaleString("en-IN")}/month`
+      : "To be confirmed";
+
     const message = `
 Hello Skyline PG,
 
-I would like to make a pre-booking enquiry.
+I would like to enquire about booking a room.
 
-Name: ${formData.name}
-Phone: ${formData.phone}
+Name: ${formData.name || "Not provided"}
+Phone: ${formData.phone || "Not provided"}
 Email: ${formData.email || "Not provided"}
-Room: ${formData.room}
-Move-in Date: ${formData.date || "Not selected"}
-Stay Duration: ${formData.duration}
-${selectedRoom ? `Monthly Rent: ₹${selectedRoom.price.toLocaleString("en-IN")}` : ""}
-Requirement: ${formData.message || "None"}
 
-Please let me know about availability and booking confirmation.
+Room: ${formData.room || "Not selected"}
+Monthly Rent: ${rent}
+
+Move-in Date: ${
+      formData.date || "Not selected"
+    }
+
+Stay Duration: ${formData.duration}
+
+Requirement:
+${formData.message || "None"}
+
+Please let me know about room availability and booking confirmation.
     `.trim();
 
-    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-      message
-    )}`;
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
   };
 
-  // =====================================================
-  // SUBMIT
-  // =====================================================
+  /*
+  =====================================================
+  PRE-BOOKING SUBMIT
+  =====================================================
+  */
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const whatsappUrl = createWhatsAppMessage();
+    setSuccessMessage("");
+    setErrorMessage("");
 
-    window.open(
-      whatsappUrl,
-      "_blank",
-      "noopener,noreferrer"
-    );
+    /*
+    -----------------------------
+    BASIC VALIDATION
+    -----------------------------
+    */
+
+    if (!formData.name.trim()) {
+      setErrorMessage(
+        "Please enter your full name."
+      );
+      return;
+    }
+
+    if (!isValidPhone(formData.phone)) {
+      setErrorMessage(
+        "Please enter a valid 10-digit Indian mobile number."
+      );
+      return;
+    }
+
+    if (!formData.room) {
+      setErrorMessage(
+        "Please select a preferred room."
+      );
+      return;
+    }
+
+    if (!formData.date) {
+      setErrorMessage(
+        "Please select your move-in date."
+      );
+      return;
+    }
+
+    /*
+    -----------------------------
+    PREVENT PAST DATE
+    -----------------------------
+    */
+
+    if (dayjs(formData.date).isBefore(dayjs(), "day")) {
+      setErrorMessage(
+        "Move-in date cannot be in the past."
+      );
+      return;
+    }
+
+    /*
+    -----------------------------
+    SUBMIT
+    -----------------------------
+    */
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        `${API_URL}/api/bookings`,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({
+            name: formData.name.trim(),
+            phone: formData.phone.trim(),
+            email: formData.email.trim(),
+            room: formData.room,
+            date: formData.date,
+            duration: formData.duration,
+            message: formData.message.trim(),
+          }),
+        }
+      );
+
+      let data = {};
+
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      if (!response.ok) {
+        throw new Error(
+          data.message ||
+            "Unable to send booking enquiry."
+        );
+      }
+
+      /*
+      -----------------------------
+      SUCCESS
+      -----------------------------
+      */
+
+      setSuccessMessage(
+        "Your pre-booking request has been sent successfully. Our team will contact you soon."
+      );
+
+      /*
+      -----------------------------
+      RESET
+      -----------------------------
+      */
+
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        room: "",
+        date: "",
+        duration: "1 Month",
+        message: "",
+      });
+
+      setSelectedRoom(null);
+
+      /*
+      -----------------------------
+      SCROLL TO SUCCESS
+      -----------------------------
+      */
+
+      window.scrollTo({
+        top:
+          document.getElementById("booking")
+            ?.offsetTop - 80 || 0,
+        behavior: "smooth",
+      });
+    } catch (error) {
+      console.error(
+        "Pre-booking error:",
+        error
+      );
+
+      setErrorMessage(
+        error.message ||
+          "Unable to send booking request. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
+
+  /*
+  =====================================================
+  UI
+  =====================================================
+  */
 
   return (
     <Box
@@ -169,9 +430,9 @@ Please let me know about availability and booking confirmation.
     >
       <Container maxWidth="lg">
 
-        {/* =================================================
+        {/* ==========================================
             HEADER
-        ================================================= */}
+        ========================================== */}
 
         <Box
           sx={{
@@ -236,9 +497,44 @@ Please let me know about availability and booking confirmation.
           </Typography>
         </Box>
 
-        {/* =================================================
+        {/* ==========================================
+            SUCCESS / ERROR
+        ========================================== */}
+
+        {successMessage && (
+          <Alert
+            severity="success"
+            icon={<CheckCircleIcon />}
+            sx={{
+              maxWidth: 1000,
+              mx: "auto",
+              mb: 3,
+              borderRadius: 2.5,
+              fontWeight: 600,
+            }}
+          >
+            {successMessage}
+          </Alert>
+        )}
+
+        {errorMessage && (
+          <Alert
+            severity="error"
+            sx={{
+              maxWidth: 1000,
+              mx: "auto",
+              mb: 3,
+              borderRadius: 2.5,
+              fontWeight: 600,
+            }}
+          >
+            {errorMessage}
+          </Alert>
+        )}
+
+        {/* ==========================================
             BOOKING CARD
-        ================================================= */}
+        ========================================== */}
 
         <Paper
           elevation={0}
@@ -258,19 +554,23 @@ Please let me know about availability and booking confirmation.
           }}
         >
 
-          {/* =================================================
+          {/* ==========================================
               SELECTED ROOM
-          ================================================= */}
+          ========================================== */}
 
           {selectedRoom && (
             <Box
               sx={{
                 mb: 4,
-                p: { xs: 2, sm: 2.5 },
+                p: {
+                  xs: 2,
+                  sm: 2.5,
+                },
                 borderRadius: 3,
                 background:
                   "linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%)",
-                border: "1px solid #dbeafe",
+                border:
+                  "1px solid #dbeafe",
               }}
             >
               <Grid
@@ -279,7 +579,7 @@ Please let me know about availability and booking confirmation.
                 alignItems="center"
               >
 
-                {/* ROOM INFO */}
+                {/* ROOM */}
 
                 <Grid
                   size={{
@@ -358,7 +658,8 @@ Please let me know about availability and booking confirmation.
                       p: 1.5,
                       borderRadius: 2.5,
                       background: "#ffffff",
-                      border: "1px solid #dbeafe",
+                      border:
+                        "1px solid #dbeafe",
                       textAlign: {
                         xs: "left",
                         md: "right",
@@ -391,6 +692,7 @@ Please let me know about availability and booking confirmation.
                       {selectedRoom.price.toLocaleString(
                         "en-IN"
                       )}
+
                       <Typography
                         component="span"
                         sx={{
@@ -409,9 +711,9 @@ Please let me know about availability and booking confirmation.
             </Box>
           )}
 
-          {/* =================================================
+          {/* ==========================================
               FORM
-          ================================================= */}
+          ========================================== */}
 
           <LocalizationProvider
             dateAdapter={AdapterDayjs}
@@ -424,7 +726,12 @@ Please let me know about availability and booking confirmation.
 
                 {/* NAME */}
 
-                <Grid size={{ xs: 12, md: 6 }}>
+                <Grid
+                  size={{
+                    xs: 12,
+                    md: 6,
+                  }}
+                >
                   <TextField
                     fullWidth
                     required
@@ -448,7 +755,12 @@ Please let me know about availability and booking confirmation.
 
                 {/* PHONE */}
 
-                <Grid size={{ xs: 12, md: 6 }}>
+                <Grid
+                  size={{
+                    xs: 12,
+                    md: 6,
+                  }}
+                >
                   <TextField
                     fullWidth
                     required
@@ -456,9 +768,10 @@ Please let me know about availability and booking confirmation.
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="Enter phone number"
+                    placeholder="Enter 10-digit mobile number"
                     inputProps={{
                       maxLength: 10,
+                      inputMode: "numeric",
                     }}
                     InputProps={{
                       startAdornment: (
@@ -475,7 +788,12 @@ Please let me know about availability and booking confirmation.
 
                 {/* EMAIL */}
 
-                <Grid size={{ xs: 12, md: 6 }}>
+                <Grid
+                  size={{
+                    xs: 12,
+                    md: 6,
+                  }}
+                >
                   <TextField
                     fullWidth
                     label="Email Address"
@@ -499,7 +817,12 @@ Please let me know about availability and booking confirmation.
 
                 {/* ROOM */}
 
-                <Grid size={{ xs: 12, md: 6 }}>
+                <Grid
+                  size={{
+                    xs: 12,
+                    md: 6,
+                  }}
+                >
                   <TextField
                     fullWidth
                     required
@@ -519,35 +842,29 @@ Please let me know about availability and booking confirmation.
                       ),
                     }}
                   >
-                    <MenuItem value="AC 1 Sharing">
-                      AC 1 Sharing — ₹21,000/month
-                    </MenuItem>
-
-                    <MenuItem value="AC 2 Sharing">
-                      AC 2 Sharing — ₹10,500/month
-                    </MenuItem>
-
-                    <MenuItem value="AC 3 Sharing">
-                      AC 3 Sharing — ₹8,500/month
-                    </MenuItem>
-
-                    <MenuItem value="Non-AC 1 Sharing">
-                      Non-AC 1 Sharing — ₹18,000/month
-                    </MenuItem>
-
-                    <MenuItem value="Non-AC 2 Sharing">
-                      Non-AC 2 Sharing — ₹9,000/month
-                    </MenuItem>
-
-                    <MenuItem value="Non-AC 3 Sharing">
-                      Non-AC 3 Sharing — ₹7,000/month
-                    </MenuItem>
+                    {roomOptions.map((room) => (
+                      <MenuItem
+                        key={room.title}
+                        value={room.title}
+                      >
+                        {room.title} — ₹
+                        {room.price.toLocaleString(
+                          "en-IN"
+                        )}
+                        /month
+                      </MenuItem>
+                    ))}
                   </TextField>
                 </Grid>
 
-                {/* MOVE IN */}
+                {/* MOVE-IN DATE */}
 
-                <Grid size={{ xs: 12, md: 6 }}>
+                <Grid
+                  size={{
+                    xs: 12,
+                    md: 6,
+                  }}
+                >
                   <DatePicker
                     label="Move-in Date"
                     format="DD/MM/YYYY"
@@ -566,6 +883,9 @@ Please let me know about availability and booking confirmation.
                             )
                           : "",
                       }));
+
+                      setSuccessMessage("");
+                      setErrorMessage("");
                     }}
                     slotProps={{
                       textField: {
@@ -588,7 +908,12 @@ Please let me know about availability and booking confirmation.
 
                 {/* DURATION */}
 
-                <Grid size={{ xs: 12, md: 6 }}>
+                <Grid
+                  size={{
+                    xs: 12,
+                    md: 6,
+                  }}
+                >
                   <TextField
                     fullWidth
                     required
@@ -645,9 +970,7 @@ Please let me know about availability and booking confirmation.
                   />
                 </Grid>
 
-                {/* =================================================
-                    PRICE SUMMARY
-                ================================================= */}
+                {/* PRICE SUMMARY */}
 
                 {selectedRoom && (
                   <Grid size={{ xs: 12 }}>
@@ -719,12 +1042,10 @@ Please let me know about availability and booking confirmation.
                           sx={{
                             background:
                               "#eff6ff",
-                            color:
-                              "#1565C0",
+                            color: "#1565C0",
                             fontWeight: 800,
                             "& .MuiChip-icon": {
-                              color:
-                                "#16a34a",
+                              color: "#16a34a",
                             },
                           }}
                         />
@@ -737,17 +1058,27 @@ Please let me know about availability and booking confirmation.
                   <Divider sx={{ my: 0.5 }} />
                 </Grid>
 
-                {/* =================================================
-                    PRE BOOK BUTTON
-                ================================================= */}
+                {/* ======================================
+                    PRE-BOOKING
+                ====================================== */}
 
-                <Grid size={{ xs: 12, md: 7 }}>
+                <Grid
+                  size={{
+                    xs: 12,
+                    md: 7,
+                  }}
+                >
                   <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     size="large"
-                    endIcon={<SendIcon />}
+                    disabled={loading}
+                    endIcon={
+                      loading ? null : (
+                        <SendIcon />
+                      )
+                    }
                     sx={{
                       py: 1.5,
                       borderRadius: 2.5,
@@ -761,13 +1092,22 @@ Please let me know about availability and booking confirmation.
                       },
                     }}
                   >
-                    Send Pre-Booking Request
+                    {loading
+                      ? "Sending..."
+                      : "Send Pre-Booking Request"}
                   </Button>
                 </Grid>
 
-                {/* WHATSAPP */}
+                {/* ======================================
+                    WHATSAPP
+                ====================================== */}
 
-                <Grid size={{ xs: 12, md: 5 }}>
+                <Grid
+                  size={{
+                    xs: 12,
+                    md: 5,
+                  }}
+                >
                   <Button
                     fullWidth
                     variant="outlined"
@@ -787,23 +1127,21 @@ Please let me know about availability and booking confirmation.
 
                       "&:hover": {
                         borderColor: "#15803d",
-                        background:
-                          "#f0fdf4",
+                        background: "#f0fdf4",
                       },
                     }}
                   >
                     WhatsApp Booking
                   </Button>
                 </Grid>
-
               </Grid>
             </Box>
           </LocalizationProvider>
         </Paper>
 
-        {/* =================================================
-            SMALL NOTE
-        ================================================= */}
+        {/* ==========================================
+            NOTE
+        ========================================== */}
 
         <Typography
           sx={{
@@ -816,7 +1154,6 @@ Please let me know about availability and booking confirmation.
           Pre-booking is an enquiry only. Room
           availability will be confirmed by our team.
         </Typography>
-
       </Container>
     </Box>
   );
